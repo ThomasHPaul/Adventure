@@ -18,6 +18,7 @@ namespace Adventure
 
         public static void StartGame()
         {
+            TitleScreen();
             NameCharacter();
 
             Console.WriteLine("Your adventure is about to begin!\n\n"
@@ -33,6 +34,28 @@ namespace Adventure
             Console.Write("How do you answer?\n 1) Yes\n 2) No\n 3) Repeat the question\n 4) Stay silent\n");
         }
 
+        static void TitleScreen()
+        {
+            //TO DO: set title background & foreground color
+
+            string TITLE =
+            @"
+             _______           _______  _______ _________
+            (  ___  )|\     /|(  ____ \(  ____ \\__   __/
+            | (   ) || )   ( || (    \/| (    \/   ) (   
+            | |   | || |   | || (__    | (_____    | |   
+            | |   | || |   | ||  __)   (_____  )   | |   
+            | | /\| || |   | || (            ) |   | |   
+            | (_\ \ || (___) || (____/\/\____) |   | |   
+            (____\/_)(_______)(_______/\_______)   )_(                                             
+            ";
+
+            Console.WriteLine(TITLE);
+            Console.WriteLine("\n\nPress any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
         static void NameCharacter()
         {
             Console.WriteLine("Welcome to Quest!\n\nWhat is your name?");
@@ -44,11 +67,21 @@ namespace Adventure
             }
 
             Console.WriteLine($"\nYour character's name is {characterName}.\n\n");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static void Dialog(string message)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        static void Dialog(string message, ConsoleColor dialogColor)
+        {
+            Console.ForegroundColor = dialogColor;
             Console.WriteLine(message);
             Console.ResetColor();
         }
@@ -69,6 +102,8 @@ namespace Adventure
         }
     }
 }
+
+
 
 
 
