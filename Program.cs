@@ -9,13 +9,12 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace Adventure
 {
     class Game
     {
-        static string characterName = "Stalwart Pal";
-
         public static void StartGame()
         {
             TitleScreen();
@@ -157,17 +156,20 @@ namespace Adventure
 
         static void NameCharacter()
         {
+            string characterName = "Stalwart Pal";
             Console.WriteLine("Welcome to Quest!\n\nWhat is your name?");
 
+            // Assign default name if nothing is entered
             string possibleName = Console.ReadLine();
             if (!possibleName.Equals(""))
             {
                 characterName = possibleName;
             }
 
-            Console.WriteLine($"\nYour character's name is {characterName}.\n\n");
+            Player player = new Player(characterName, 12, 3, 1, 0, 1);
+
+            Console.WriteLine($"\nYour character's name is {player.GetName()}.\n\n");
             Continue();
-            Console.Clear();
         }
 
         static void Dialogue(string message)
@@ -191,17 +193,17 @@ namespace Adventure
             Console.Clear();
         }
 
-        static void Battle(/*Creature monster*/)
+        static void Battle(Player player, Creature monster)
         {
-            string charName = "Player";
-            int cHP = 25;
-            int cAP = 6;
-            int cAC = 3;
+            string charName = player.GetName();
+            int cHP = player.GetHitPoints();
+            int cAP = player.GetAttackPoints();
+            int cAC = player.GetArmorClass();
 
-            string monName = "Kobold";
-            int mHP = 7;
-            int mAP = 3;
-            int mAC = 2;
+            string monName = monster.GetName();
+            int mHP = monster.GetHitPoints();
+            int mAP = monster.GetAttackPoints();
+            int mAC = monster.GetArmorClass();
 
             string BattleHud =
             $@"
@@ -224,28 +226,87 @@ namespace Adventure
 
     class Creature
     {
-        // Name
+        public Creature(string name, int hitPoints, int attackPoints, int armorClass, int exp)
+        {
+            this.Name = name;
+            this.HitPoints = hitPoints;
+            this.CurrentHitPoints = hitPoints;
+            this.AttackPoints = attackPoints;
+            this.ArmorClass = armorClass;
+            this.Experience = exp;
+        }
+        private readonly string Name;
+        protected int HitPoints;
+        protected int CurrentHitPoints;
+        protected int AttackPoints;
+        protected int ArmorClass;
+        protected int Experience;
 
-        // Hit Points
+        // For inventory, used for buying, selling, adding items after battle, tracking potion count, tracking gold
+        private Dictionary<string, int> Items;
 
-        // Attack Points
+        public void SetCurrentHitPoint(int hitPoints)
+        {
+            this.CurrentHitPoints = hitPoints;
+        }     
+        
+        public string GetName()
+        {
+            return this.Name;
+        }
 
-        // Armor Class
+        public int GetHitPoints()
+        {
+            return this.HitPoints;
+        }
 
-        // Experience
+        public int GetAttackPoints()
+        {
+            return this.AttackPoints;
+        }
 
-        // Attack()
+        public int GetArmorClass()
+        {
+            return this.ArmorClass;
+        }
+    }
 
-        // UsePotion()
+    class Player : Creature
+    {
+        private int Level;
 
-        // LevelUp()
+        public Player(string name, int hitPoints, int attackPoints, int armorClass, int exp, int level) : base(name, hitPoints, attackPoints, armorClass, exp)
+        {
+            this.Level = level;
+        }
+        public void UsePotion()
+        {
 
-        // LootItems()
+        }
 
-        // RestAtInn()
+        public void LevelUp()
+        {
 
-        // class Backpack
-        // Abstraction for inventory, used for buying, selling, adding items after battle, tracking potion count, tracking gold
+        }
+
+        public void LootItems()
+        {
+
+        }
+
+        public void RestAtInn()
+        {
+
+        }
+        public void SetExperience(int exp)
+        {
+            this.Experience = exp;
+        }
+
+        public int GetLevel()
+        {
+            return this.Level;
+        }
     }
 
     class Program
