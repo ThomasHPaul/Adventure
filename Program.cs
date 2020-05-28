@@ -109,13 +109,11 @@ namespace Adventure
             // battle with ogre
 
             Console.WriteLine("After the fight, the wagon circle is in shambles. You find Mark on the ground in a pool of blood and breathing heavily.");
-            Dialogue($"That was some fight huh?\n\n...I thought we might have trouble when the caravan leader traded for a strange crystal...You were at " +
-                $"the tavern when it happened...I dismissed it but....here we are now. You're all that's left...Kerakstad is just under a day from here. " +
-                $"You should be safe there...\n\nPlease..find whoever did this, and make them pay..for me, huh?...");
+            Dialogue("That was some fight huh?\n\n...I thought we might have trouble when the caravan leader traded for a strange crystal...You were at " +
+                "the tavern when it happened...I dismissed it but....here we are now. You're all that's left...Kerakstad is just under a day from here. " +
+                "You should be safe there...\n\nPlease..find whoever did this, and make them pay..for me, huh?...");
             Continue();
-
-
-
+                                 
 
             /*
             (before next tut) 1 - mostly text with one branch
@@ -222,6 +220,32 @@ namespace Adventure
     class Item
     {
 
+    }
+
+    class Creature
+    {
+        // Name
+
+        // Hit Points
+
+        // Attack Points
+
+        // Armor Class
+
+        // Experience
+
+        // Attack()
+
+        // UsePotion()
+
+        // LevelUp()
+
+        // LootItems()
+
+        // RestAtInn()
+
+        // class Backpack
+        // Abstraction for inventory, used for buying, selling, adding items after battle, tracking potion count, tracking gold
     }
 
     class Program
